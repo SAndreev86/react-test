@@ -1,36 +1,36 @@
 import React, {Component} from 'react';
-import SearchPost from './SearchPost.js';
+import AddTodo from './AddTodo.js';
 
 const posts = {
-    menu: [
+    list: [
         {
-            link: '/articles',
             label: 'Articles'
         },
         {
-            link: '/contacts',
             label: 'Contacts'
         },
         {
-            link: '/posts',
             label: 'Posts'
         }
     ],
-    setMenu: function (link, label) {
+    setList: function (label) {
         let post = {
-            link: link,
             label: label
         };
 
-        posts.push(post);
+        posts.list.push(post);
+    },
+    unsetList: function (index) {
+        delete posts.list[index];
     }
+
 };
 
 class App extends Component {
     render() {
         return (
             <div>
-                <SearchPost posts={posts}/>
+                <AddTodo todo={posts}/>
             </div>
         );
     }
