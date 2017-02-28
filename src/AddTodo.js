@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import './AddTodo.css';
 
 class AddTodo extends Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class AddTodo extends Component {
 
         this.state = {
             Input: '',
-            listState: this.props.todo.list,
+            listState: this.props.todo,
         };
     }
 
@@ -20,35 +22,47 @@ class AddTodo extends Component {
     }
 
     setList() {
-        this.props.todo.setList(this.state.Input);
-        this.setState({listState: this.props.todo.list});
+        this.props.setList(this.state.Input);
     }
 
     unItemList(e) {
-        this.props.todo.unsetList(e);
-        this.setState({listState: this.props.todo.list});
+        this.props.unsetList(e);
     }
 
     render() {
-
+        //console.log("dsfdf");
         return (
             <div>
-                <br/><input onChange={this.onChangeHandler} type = "text"/>
-                    <button onClick={this.setList}>+</button><br/>
+                <div className="row">
+                    <div className="col-xs-10">
+                        <input className="input_todo" onChange={this.onChangeHandler} type = "text"/>
+                    </div>
+                    <div className="col-xs-2 pad_btn">
+                        <button className="button_add" onClick={this.setList}>
+                            <span className="glyphicon glyphicon-plus"></span>
+                        </button><br/>
+                    </div>
+                </div>
 
+                <ReactCSSTransitionGroup transitionName="example"
+                                         transitionEnterTimeout={300}
+                                         transitionLeaveTimeout={300}>
                 {this.state.listState.map((item, index) => {
                     return (
 
                         <div key={index}>
-                            <div>{item.label}
-                                <button onClick={() => {this.unItemList(index)}}>x</button>
+                            <div>
+                                <div className="item inl">{item.label}</div>
+                                <button className=" btn btn-default btn-xs" onClick={() => {this.unItemList(index)}}>
+                                    <span className="glyphicon glyphicon-remove"></span>
+                                </button>
                             </div>
                             <br/>
                         </div>
 
                     );
                 })}
-
+                </ReactCSSTransitionGroup>
             </div>
 
         );

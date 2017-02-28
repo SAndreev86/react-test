@@ -1,0 +1,63 @@
+.example-enter {
+    opacity: 0;
+    transform: translateX(-250px);
+}
+.example-enter.example-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: 0.3s;
+}
+
+.example-leave {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.example-leave.example-leave-active {
+    opacity: 0;
+    transform: translateX(250px);
+    transition: 0.3s;
+}
+
+.input_todo {
+    background: #fff no-repeat 13px 13px;
+    border: none;
+    width: 100%;
+    line-height: 19px;
+    padding: 11px 0;
+
+    border-radius: 2px;
+    box-shadow: 0 2px 8px #c4c4c4 inset;
+    text-align: left;
+    font-size: 14px;
+    font-family: inherit;
+    color: #738289;
+    font-weight: bold;
+    outline: none;
+    text-indent: 10px;
+}
+
+.button_add {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+}
+.pad_btn {
+    margin-left: -30px;
+}
+.item {
+    text-align: left;
+    font-size: 14px;
+    font-family: inherit;
+    color: #5392ad;
+    font-weight: bold;
+    padding-top: 15px;
+}
+.inl {
+
+    display: inline-block;
+}
+.button_rem {
+    height: 24px;
+    width: 30px;
+ }
