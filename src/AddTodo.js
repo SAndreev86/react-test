@@ -52,7 +52,7 @@ class AddTodo extends Component {
 
                         <div key={index}>
                             <div>
-                                <div className="item inl">{item.label}</div>
+                                <div className="item inl">{item}</div>
                                 <button className=" btn btn-default btn-xs" onClick={() => {this.unItemList(index)}}>
                                     <span className="glyphicon glyphicon-remove"></span>
                                 </button>
