@@ -15,8 +15,13 @@ class App extends Component {
             groups: [
 
                 '37756782',
+                '42813041'
             ],
-            keys: [],
+            keys: [
+                'авари',
+                'мчс',
+                'дтп'
+            ],
             Input: '',
             posts: [],
 
@@ -25,31 +30,53 @@ class App extends Component {
 
     getPosts() {
 
-        var temptttt = [];
+        var temp = [];
 
         this.state.groups.forEach((group, index) => {
             if (/^[0-9]{8}$/.test(group)) {
 
+                /*var xhr = new XMLHttpRequest();
+                xhr.open('GET', "http://sandreev87.000webhostapp.com/?group=" + group.trim(), false);
+                xhr.send();
+                if (xhr.status == 200) {
+                    //console.log(JSON.parse(xhr.responseText));
+                    temptttt = temptttt.concat(JSON.parse(xhr.responseText).response.items);
+                }*/
+
                 fetch("http://sandreev87.000webhostapp.com/?group=" + group.trim())
                     .then(result => result.json())
                     .then(items => {
-                        temptttt = temptttt.concat(items.response.items);
-                        console.log(temptttt.length)
+
+                        this.state.keys.forEach((key) => {
+
+                            let check = false;
+
+                            items.response.items.forEach((item) => {
+
+                                if(item.text.toLowerCase().indexOf(key.toLowerCase()) + 1 && !check) {
+                                    temp = temp.concat(item);
+                                    check = true;
+                                    return item;
+                                }
+
+                            });
+
+                        });
                     });
             }
         });
 
+        setTimeout(() => {
 
-        console.log(temptttt.length)
-        this.setState({posts: temptttt});
+            console.log(temp.length);
+            this.setState({posts: temp});
+
+        },15000);
     }
 
     componentDidMount() {
-        setInterval(this.getPosts, 5000);
-
-        console.log("dfoooooohgfhghhdfgdfgdfgdfgdfgdgdgdfgdfgfooooooooooooooghdfg")
-
-
+        this.getPosts();
+        setInterval(this.getPosts, 25000);
     }
 
 
